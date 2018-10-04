@@ -20,10 +20,24 @@ request.onload = function() {
 
     if (request.status >= 200 && request.status < 400) {
         data.forEach(movie => {
-            console.log(movie.title);
+            const card = document.createElement('div');
+            card.setAttribute('class', 'card');
+
+            const heading = document.createElement('h1');
+            heading.textContent = movie.title;
+
+            const para = document.createElement('p');
+            movie.description = movie.description.substring(0, 300);
+            para.textContent = `${movie.description}...`
+
+            container.appendChild(card);
+            card.appendChild(heading);
+            card.appendChild(para);
         });
     } else {
-        console.log('Error');
+        const errorMessage = document.createElement('h1');
+        errorMessage.textContent = `Gah, it's not working!`;
+        app.appendChild(errorMessage);
     }
 
     
